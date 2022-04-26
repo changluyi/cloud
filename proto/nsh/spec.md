@@ -22,9 +22,6 @@ NSH组成:
      ~                Context Header(s)                              ~
      |                                                               |
 
-   Base Header:  Provides information about the service header and the
-      payload protocol.
-      
 Base Header:  Provides information about the service header and the
       payload protocol.
 

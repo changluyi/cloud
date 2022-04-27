@@ -142,41 +142,48 @@ si 与 spi一起用于 SFP 选择和确定路径中的下一个 SFF/SF
 
 ## nsh actions
 
- +-----------+-----------------------+-------+---------------+-------+
-   |           | Insert, remove, or    |Forward| Update        |Service|
-   |           | replace the NSH       |the NSH| the NSH       |policy |
-   |           |                       |packets|               |sel.   |
-   |Component  +-------+-------+-------+       +-------+-------+       |
-   |           |       |       |       |       |Dec.   |Update |       |
-   |           |Insert |Remove |Replace|       |Service|Context|       |
-   |           |       |       |       |       |Index  |Header |       |
-   +-----------+-------+-------+-------+-------+-------+-------+-------+
-   |           |  +    |       |   +   |       |       |   +   |       |
-   |Classifier |       |       |       |       |       |       |       |
-   +-----------+-------+-------+-------+-------+-------+-------+-------+
-   |Service    |       |   +   |       |   +   |       |       |       |
-   |Function   |       |       |       |       |       |       |       |
-   |Forwarder  |       |       |       |       |       |       |       |
-   |(SFF)      |       |       |       |       |       |       |       |
-   +-----------+-------+-------+-------+-------+-------+-------+-------+
-   |Service    |       |       |       |       |   +   |   +   |   +   |
-   |Function   |       |       |       |       |       |       |       |
-   |(SF)       |       |       |       |       |       |       |       |
-   +-----------+-------+-------+-------+-------+-------+-------+-------+
-   |           |  +    |   +   |       |       |   +   |   +   |       |
-   |SFC Proxy  |       |       |       |       |       |       |       |
-   +-----------+-------+-------+-------+-------+-------+-------+-------+
++-----------+-----------------------+-------+---------------+-------+
+|           | Insert, remove, or    |Forward| Update        |Service|
+|           | replace the NSH       |the NSH| the NSH       |policy |
+|           |                       |packets|               |sel.   |
+|Component  +-------+-------+-------+       +-------+-------+       |
+|           |       |       |       |       |Dec.   |Update |       |
+|           |Insert |Remove |Replace|       |Service|Context|       |
+|           |       |       |       |       |Index  |Header |       |
++-----------+-------+-------+-------+-------+-------+-------+-------+
+|           |  +    |       |   +   |       |       |   +   |       |
+|Classifier |       |       |       |       |       |       |       |
++-----------+-------+-------+-------+-------+-------+-------+-------+
+|Service    |       |   +   |       |   +   |       |       |       |
+|Function   |       |       |       |       |       |       |       |
+|Forwarder  |       |       |       |       |       |       |       |
+|(SFF)      |       |       |       |       |       |       |       |
++-----------+-------+-------+-------+-------+-------+-------+-------+
+|Service    |       |       |       |       |   +   |   +   |   +   |
+|Function   |       |       |       |       |       |       |       |
+|(SF)       |       |       |       |       |       |       |       |
++-----------+-------+-------+-------+-------+-------+-------+-------+
+|           |  +    |   +   |       |       |   +   |   +   |       |
+|SFC Proxy  |       |       |       |       |       |       |       |
++-----------+-------+-------+-------+-------+-------+-------+-------+
+
+这里sff的remove action只发生在sfp的最后一跳
+
+NSH Action and Role Mapping
 
 ### SFFs and Overlay Selection
+
 SPI 和 SI 的组合提供了逻辑 SF 的标识及其在服务平面内的顺序。该组合用于选择适当的网络定位器进行覆盖转发。逻辑 SF 可以是单个 SF 或一组等效的合格 SF。在后一种情况下，SFF 根据需要在 SF 集合之间提供负载分配。
 
 SPI 到传输封装的映射发生在 SFF 上（如上所述，路径中的第一个 SFF 从分类器获取 NSH 封装的数据包）,其实vpp的nsh map就是sff+classifier的功能。
+
 vppctl create nsh map nsp 370 nsi 254 mapped-nsp 370 mapped-nsi 254 nsh_action pop encap-vxlan4-intf 46
+
 #将spi/si 370/254的报文 replace成 spi/si 370/254，然后从vxlan tunnel封装出去
 
 vppctl create nsh entry nsp 370 nsi 254 md-type 2 next-ethernet (map后的spi/si)
-#指定nsh bash header 的md-type和下一跳proto
 
+#指定nsh bash header 的md-type和下一跳proto
 
 #### SFF NSH Mapping Example
       +------+------+---------------------+-------------------------+

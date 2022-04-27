@@ -40,9 +40,13 @@ Context Header:  Carries metadata (i.e., context data) along a
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 TTL：Indicates the maximum SFF hops for an SFP
+
 Metadata (MD) Type： 表示强制 NSH Base Header 和 Service Path Header 之外的 NSH 格式,MD Type 定义了所携带的metadata的格式
+
 md_type 0: reserved
+
 md_type 1: 这表示header的格式包含一个Fixed-Length Context Header
+
       0                   1                   2                   3
       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

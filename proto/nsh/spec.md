@@ -76,6 +76,17 @@ md_type 2: 这不强制要求除基本报头和服务路径报头之外的任何
      ~              Variable-Length Context Headers  (opt.)          ~
      |                                                               |
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     
+Next Protocol: 表示封装数据的协议类型.
+
+0x1: IPv4
+0x2: IPv6
+0x3: Ethernet
+0x4: NSH
+0x5: MPLS
+0xFE: Experiment 1
+0xFF: Experiment 2
+
  
 可选的可变长度上下文标头必须是 4 字节的整数
 
@@ -89,6 +100,7 @@ md_type 2: 这不强制要求除基本报头和服务路径报头之外的任何
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      
 Metadata Class： 定义 Type 字段的范围以提供分层命名空间
+
         +------------------+------------------------+------------+
         | Value            | Meaning                | Reference  |
         +------------------+------------------------+------------+
@@ -112,8 +124,26 @@ Lengh: Indicates the length of the variable-length metadata
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
      Service Path Identifier (SPI): 24 bits
+
      Service Index (SI): 8 bits
+
+#### spi (service path identifier)
+
+唯一标识服务功能路径 (SFP), spi和sfp一一对应。
      
+#### si (service index)
+
+提供 SFP 内的位置。给定 SFP 的初始分类器应该将 SI 设置为 255， 在执行所需的服务后，服务功能或 SFC 代理节点必须将服务索引减 1， 新的递减 SI 值必须用于出口数据包的 NSH。
+
+si 与 spi一起用于 SFP 选择和确定路径中的下一个 SFF/SF
+
+其实这个si就和base header ttl很像了，都是经过一跳sff后会减一
+
+
+## nsh actions
+
+
+
 
 
 

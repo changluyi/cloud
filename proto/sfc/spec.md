@@ -92,6 +92,7 @@ sff需要完成以下必备的功能：
 
 
 
-# nsh
-参考
+
+# sfc 控制面板
+https://datatracker.ietf.org/doc/html/draft-ietf-sfc-control-plane-08
 

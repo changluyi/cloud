@@ -61,6 +61,8 @@ md_type 1: 这表示header的格式包含一个Fixed-Length Context Header
 
                           NSH MD Type 0x1
 
+支持 SFC 的 SF 或 SFC 代理需要首先接收数据结构和语义，以便处理放置在context中的数。不知道 MD 类型 1 的 NSH 的context header格式的 SF 或 SFC 代理必须丢弃任何具有此类 NSH 的数据包
+
 md_type 2: 这不强制要求除基本报头和服务路径报头之外的任何报头，但可能包含可选的可变长度上context
 
       0                   1                   2                   3
@@ -74,6 +76,8 @@ md_type 2: 这不强制要求除基本报头和服务路径报头之外的任何
      ~              Variable-Length Context Headers  (opt.)          ~
      |                                                               |
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+可选的可变长度上下文标头必须是 4 字节的整数
 
 
       0                   1                   2                   3

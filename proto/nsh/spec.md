@@ -167,7 +167,54 @@ si 与 spi一起用于 SFP 选择和确定路径中的下一个 SFF/SF
    |SFC Proxy  |       |       |       |       |       |       |       |
    +-----------+-------+-------+-------+-------+-------+-------+-------+
 
+### SFFs and Overlay Selection
+SPI 和 SI 的组合提供了逻辑 SF 的标识及其在服务平面内的顺序。该组合用于选择适当的网络定位器进行覆盖转发。逻辑 SF 可以是单个 SF 或一组等效的合格 SF。在后一种情况下，SFF 根据需要在 SF 集合之间提供负载分配。
+
+SPI 到传输封装的映射发生在 SFF 上（如上所述，路径中的第一个 SFF 从分类器获取 NSH 封装的数据包）,其实vpp的nsh map就是sff+classifier的功能。
+vppctl create nsh map nsp 370 nsi 254 mapped-nsp 370 mapped-nsi 254 nsh_action pop encap-vxlan4-intf 46
+#将spi/si 370/254的报文 replace成 spi/si 370/254，然后从vxlan tunnel封装出去
+
+vppctl create nsh entry nsp 370 nsi 254 md-type 2 next-ethernet (map后的spi/si)
+#指定nsh bash header 的md-type和下一跳proto
 
 
+#### SFF NSH Mapping Example
+      +------+------+---------------------+-------------------------+
+      | SPI  | SI   | Next Hop(s)         | Transport Encapsulation |
+      +------+------+---------------------+-------------------------+
+      | 10   | 255  | 192.0.2.1           | VXLAN-gpe               |
+      |      |      |                     |                         |
+      | 10   | 254  | 198.51.100.10       | GRE                     |
+      |      |      |                     |                         |
+      | 10   | 251  | 198.51.100.15       | GRE                     |
+      |      |      |                     |                         |
+      | 40   | 251  | 198.51.100.15       | GRE                     |
+      |      |      |                     |                         |
+      | 50   | 200  | 01:23:45:67:89:ab   | Ethernet                |
+      |      |      |                     |                         |
+      | 15   | 212  | Null (end of path)  | None                    |
+      +------+------+---------------------+-------------------------+
 
 
+#### NSH-to-SF Mapping Example
+                      +------+-----+----------------+
+                      | SPI  | SI  | Next Hop(s)    |
+                      +------+-----+----------------+
+                      | 10   | 3   | SF2            |
+                      |      |     |                |
+                      | 245  | 12  | SF34           |
+                      |      |     |                |
+                      | 40   | 9   | SF9            |
+                      +------+-----+----------------+
+
+#### SF Locator Mapping Example
+
+          +------+-------------------+-------------------------+
+          | SF   | Next Hop(s)       | Transport Encapsulation |
+          +------+-------------------+-------------------------+
+          | SF2  | 192.0.2.2         | VXLAN-gpe               |
+          |      |                   |                         |
+          | SF34 | 198.51.100.34     | UDP                     |
+          |      |                   |                         |
+          | SF9  | 2001:db8::1       | GRE                     |
+          +------+-------------------+-------------------------+

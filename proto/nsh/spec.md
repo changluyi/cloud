@@ -39,4 +39,31 @@ Context Header:  Carries metadata (i.e., context data) along a
      |Ver|O|U|    TTL    |   Length  |U|U|U|U|MD Type| Next Protocol |
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
+TTL：Indicates the maximum SFF hops for an SFP
+Metadata (MD) Type： 表示强制 NSH Base Header 和 Service Path Header 之外的 NSH 格式,MD Type 定义了所携带的metadata的格式
+md_type 0: reserved
+md_type 1: 这表示header的格式包含一个Fixed-Length Context Header
+md_type 2: 这不强制要求除基本报头和服务路径报头之外的任何报头，但可能包含可选的可变长度上context
 
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |          Metadata Class       |      Type     |U|    Length   |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                   Variable-Length Metadata                    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     
+Metadata Class： 定义 Type 字段的范围以提供分层命名空间
+        +------------------+------------------------+------------+
+        | Value            | Meaning                | Reference  |
+        +------------------+------------------------+------------+
+        | 0x0000           | IETF Base NSH MD Class | RFC 8300   |
+        |                  |                        |            |
+        | 0xfff6 to 0xfffe | Experimental           | RFC 8300   |
+        |                  |                        |            |
+        | 0xffff           | Reserved               | RFC 8300   |
+        +------------------+------------------------+------------+
+Type：
+Lengh: Indicates the length of the variable-length metadata
+
+  

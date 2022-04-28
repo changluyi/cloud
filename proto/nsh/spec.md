@@ -179,11 +179,8 @@ SPI 到传输封装的映射发生在 SFF 上（如上所述，路径中的第�
 
 vppctl create nsh map nsp 370 nsi 254 mapped-nsp 370 mapped-nsi 254 nsh_action pop encap-vxlan4-intf 46
 
-#将spi/si 370/254的报文 replace成 spi/si 370/254，然后从vxlan tunnel封装出去
-
 vppctl create nsh entry nsp 370 nsi 254 md-type 2 next-ethernet (map后的spi/si)
 
-#指定nsh bash header 的md-type和下一跳proto
 
 #### SFF NSH Mapping Example
       +------+------+---------------------+-------------------------+

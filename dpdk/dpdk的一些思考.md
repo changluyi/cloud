@@ -57,9 +57,7 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 
 # 内存管理
 
-谈到内存管理，首先得有个问题，为啥dpdk要做重新去整一套内存分配的接口，能不能直接用malloc。
 
-答案是当然不能，dpdk有个关键点就是去实现了零copy。
 
 
 

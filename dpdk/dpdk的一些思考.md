@@ -42,6 +42,7 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 启动一个vpp进程，查看/proc/pid/maps可以看到device映射到进程的地址是fd580000和fdfe0000
 
 7fea80000000-7fea80020000 rw-s fd580000 00:16 46265                      /sys/devices/pci0000:00/0000:00:11.0/0000:02:05.0/resource0
+
 7fea80020000-7fea80030000 rw-s fdfe0000 00:16 46266                      /sys/devices/pci0000:00/0000:00:11.0/0000:02:05.0/resource2
 
 那么去查看uio的地址也是在fd580000和fdfe0000

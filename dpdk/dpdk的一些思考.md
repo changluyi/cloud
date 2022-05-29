@@ -5,7 +5,7 @@
 
 linux提供的一种 userspace i/o技术，因为一般linux io驱动都放在kernel层，放在uio后用户空间就能直接调用
 
-### 1 注册uio设备。
+## 注册uio设备。
 
 uio源文档https://www.kernel.org/doc/html/v5.0/driver-api/uio-howto.html
 
@@ -13,7 +13,7 @@ uio源文档https://www.kernel.org/doc/html/v5.0/driver-api/uio-howto.html
 
 ![image](https://github.com/changluyi/network/blob/master/dpdk/uio.jpg)
 
-#### 注册uio驱动
+### 注册uio驱动
 
 kernel注册流程首先得有这个驱动，这一步由modprobe uio_pci_generic完成。
 

@@ -222,3 +222,5 @@ vppctl create nsh entry nsp 370 nsi 254 md-type 2 next-ethernet (map后的spi/si
           |      |                   |                         |
           | SF9  | 2001:db8::1       | GRE                     |
           +------+-------------------+-------------------------+
+
+SI 用作检测无效 SFP 的机制。 特别SI 值为零表示转发不正确，并且必须丢弃数据包。

@@ -54,7 +54,9 @@ cat /sys/class/uio/uio0/maps/map0/addr
 
 # 内存管理
 
-讲内存管理的时候
+谈到内存管理，首先得有个问题，为啥dpdk要做重新去整一套内存分配的接口，能不能直接用malloc。
+
+答案是当然不能，dpdk有个关键点就是去实现了零copy。
 
 
 

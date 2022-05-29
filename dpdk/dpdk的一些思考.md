@@ -32,7 +32,7 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 
 1）/dev/uio0 处理设备产生的中断， 有了uio后，可以把大部分响应中断的动作放到用户态，内核在收到设备中断后不做具体事务处理，直接上报用用户态
 
-用户态调用read/select函数/dev/uiox去堵塞在这个函数上，一旦设备触发内核中断，会通过read函数立马返回。用户则可以在用户态去自定义中断后的操作。
+用户态调用read函数(也可以用select)/dev/uiox去堵塞在这个函数上，一旦设备触发内核中断，会通过read函数立马返回。用户则可以在用户态去自定义中断后的操作。
 
 2） /sys/class/uio/uio0/maps/map0/ ，表示uio设备的内存映射把设备内存映射到进程中，为什么要做这个映射，因为进程可以去直接对这段内存地址读写，从而达到操作uio设备的目的
 

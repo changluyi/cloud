@@ -45,9 +45,13 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 7fea80020000-7fea80030000 rw-s fdfe0000 00:16 46266                      /sys/devices/pci0000:00/0000:00:11.0/0000:02:05.0/resource2
 
 那么去查看uio的地址也是在fd580000和fdfe0000
-cat /sys/class/uio/uio0/maps/map0/addr
+
+/sys/class/uio/uio0/maps/map0/addr
+
 0x00000000fd580000
+
 /sys/class/uio/uio0/maps/map1/addr
+
 0x00000000fdfe0000
 
 源码可见rpci_probe=>。。。。=> rte_pci_map_device

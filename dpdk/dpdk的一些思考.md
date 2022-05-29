@@ -33,7 +33,7 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 
 用户态调用read函数(也可以用select)/dev/uiox去堵塞在这个函数上，一旦设备触发内核中断，会通过read函数立马返回。用户则可以在用户态去自定义中断后的操作。
 
-2） /sys/class/uio/uio0/maps/map0/ ，表示uio设备的内存映射把设备内存映射到进程中，为什么要做这个映射，因为进程可以去直接对这段内存地址读写
+2） /sys/class/uio/uio0/maps/map0/ ，表示uio设备的内存映射把设备内存映射到进程中，进程可以去直接对这段内存地址读写，从而管理设备
 
 （补一下进程内存分配知识https://www.cnblogs.com/huxiao-tee/p/4660352.html）
 

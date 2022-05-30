@@ -45,6 +45,10 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 
 那么去查看uio的地址也是在fd580000和fdfe0000
 
+sys/class/uio/uio0/maps/map0下的
+
+addr name offset size。他们分别是映射内存的起始地址, 映射内存的名字，起始地址的页内偏移， 映射内存的大小
+ 
 /sys/class/uio/uio0/maps/map0/addr
 
 0x00000000fd580000

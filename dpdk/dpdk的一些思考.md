@@ -63,10 +63,7 @@ root@ubuntu:/sys/class/uio/uio0/maps/map1# cat size
 0x0000000000010000，
 可以看到分别对应了进程7fea80000000-7fea80020000和7fea80020000-7fea80030000的差值
 
-
 源码可见rpci_probe=>。。。。=> rte_pci_map_device
-
-那么进程可以去直接对这段内存地址读写，主要是做些什么呢？
 
 # 内存管理
 

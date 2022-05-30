@@ -57,6 +57,13 @@ addr name offset size。他们分别是设备映射内存的起始地址, 映射
 
 0x00000000fdfe0000
 
+root@ubuntu:/sys/class/uio/uio0/maps/map0# cat size
+0x0000000000020000
+root@ubuntu:/sys/class/uio/uio0/maps/map1# cat size
+0x0000000000010000，
+可以看到分别对应了进程7fea80000000-7fea80020000和7fea80020000-7fea80030000的差值
+
+
 源码可见rpci_probe=>。。。。=> rte_pci_map_device
 
 # 内存管理

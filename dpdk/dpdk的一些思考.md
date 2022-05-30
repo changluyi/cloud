@@ -37,7 +37,7 @@ modprobe uio_pci_generic把驱动注册在/sys/bus/pci/drivers/uio_pci_generic �
 
 （补一下进程内存分配知识https://www.cnblogs.com/huxiao-tee/p/4660352.html）
 
-启动一个vpp进程，查看/proc/pid/maps可以看到device映射到进程的地址是fd580000和fdfe0000
+启动一个vpp进程，查看/proc/pid/maps可以看到device映射到进程的，fd580000和fdfe0000代表的是文件的起始偏移量
 
 7fea80000000-7fea80020000 rw-s fd580000 00:16 46265                      /sys/devices/pci0000:00/0000:00:11.0/0000:02:05.0/resource0
 

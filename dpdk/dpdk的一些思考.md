@@ -75,7 +75,7 @@ root@ubuntu:/sys/class/uio/uio0/maps/map1# cat size
 
 其实跟着上面的这个解决思路，我大概会有个问题：网卡怎么和用户态进程去协商这段地址的？
 
-然后我查资料
+
 
 
 
